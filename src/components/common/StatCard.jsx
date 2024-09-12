@@ -10,7 +10,7 @@ function StatCard({ name, icon: Icon, value, color }) {
         boxShadow: "0 25px -12px rgba(0, 0, 0, 0.5)",
       }}
     >
-      <div className='px-4 sm:p-6'>
+      <div className='p-4 sm:p-6'>
         <span className='flex items-center text-sm font-medium text-gray-400'>
           <Icon size={20} className='mr-2 ' style={{ color }} /> {name}
         </span>

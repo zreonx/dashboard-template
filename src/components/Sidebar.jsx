@@ -42,17 +42,15 @@ function SideBar() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsSidebarOpen((prev) => !prev)}
-          className='p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit'
+          className={`p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit `}
         >
           <Menu size={24} />
         </motion.button>
-        <nav className='mt-8 flex-grow'>
+        <nav className='mt-8 flex-grow w-full'>
           {SIDEBAR_ITEMS.map((item, index) => (
             <Link key={item.href} to={item.href}>
               <motion.div
-                className={`flex items-center ${
-                  !isSidebarOpen && ""
-                } py-4 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2`}
+                className={`flex items-center pr-4 py-4 pl-4 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2`}
               >
                 <item.icon
                   size={20}
