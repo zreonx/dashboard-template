@@ -4,6 +4,8 @@ import StatCard from "../components/common/StatCard";
 import { BarChart2, ShoppingBag, Users, Zap } from "lucide-react";
 import React from "react";
 import SalesOverViewChart from "../components/overview/SalesOverViewChart";
+import CategoryDistributionChart from "../components/overview/CategoryDistributionChart";
+import SalesChannelChart from "../components/overview/SalesChannelChart";
 
 const STATS = [
   { name: "Total Sales", icon: Zap, value: "$12,345", color: "#6366f" },
@@ -47,6 +49,8 @@ const OverViewPage = () => {
         </motion.div>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
           <SalesOverViewChart />
+          <CategoryDistributionChart />
+          <SalesChannelChart />
         </div>
       </main>
     </div>
