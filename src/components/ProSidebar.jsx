@@ -15,6 +15,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 
 import { Sidebar, Menu as SMenu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { div } from "framer-motion/client";
+import useScreenType from "react-screentype-hook";
 
 const SIDEBAR_ITEMS = [
   {
@@ -32,15 +33,42 @@ const SIDEBAR_ITEMS = [
 ];
 
 function ProSidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const screenType = useScreenType();
+  const [isSidebarClose, setIsSidebarClose] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
+  const [isManualToggle, setIsManualToggle] = useState(true);
+
+  console.log(isSidebarClose, isManualToggle);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsSidebarClose(true);
+      }
+      if (window.innerWidth > 768) {
+        setIsSidebarClose(false);
+        setIsManualToggle(true);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isManualToggle]);
 
   const useActiveLink = () => {
     const location = useLocation();
 
     useEffect(() => {
       setActiveLink(location.pathname);
+      setIsSidebarClose(() => (screenType.isTablet ? true : false));
     }, [location.pathname]);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarClose(!isSidebarClose);
+    setIsManualToggle(true);
   };
 
   useActiveLink();
@@ -50,13 +78,13 @@ function ProSidebar() {
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setIsSidebarOpen((prev) => !prev)}
+        onClick={toggleSidebar}
         className={`p-4  transition-colors max-w-fit self-start ml-3`}
       >
         <Menu />
       </motion.button>
       <Sidebar
-        collapsed={isSidebarOpen}
+        collapsed={isSidebarClose}
         backgroundColor='rgb(55 65 81 / var(--tw-bg-opacity)'
         rootStyles={{
           border: "none",

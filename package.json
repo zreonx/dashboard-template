@@ -16,6 +16,7 @@
     "react-dom": "^18.3.1",
     "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^6.26.2",
+    "react-screentype-hook": "^1.0.18",
     "recharts": "^2.13.0-alpha.5"
   },
   "devDependencies": {
