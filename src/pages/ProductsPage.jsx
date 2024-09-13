@@ -3,7 +3,9 @@ import Header from "../components/common/Header";
 import StatCard from "../components/common/StatCard";
 import { motion } from "framer-motion";
 import { BarChart2, ShoppingBag, Users, Zap } from "lucide-react";
-import ProductTable from "../components/products/ProductTable";
+import ProductsTable from "../components/products/ProductsTable";
+import SalesTrendChart from "../components/products/SalesTrendChart";
+import CategoryDistributionChart from "../components/overview/CategoryDistributionChart";
 
 const STATS = [
   { name: "Total Sales", icon: Zap, value: "$12,345", color: "#6366f" },
@@ -47,7 +49,13 @@ function ProductsPage() {
         </motion.div>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'></div>
         {/* Product Table */}
-        <ProductTable />
+        <ProductsTable />
+
+        {/* Charts */}
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6'>
+          <SalesTrendChart />
+          <CategoryDistributionChart />
+        </div>
       </main>
     </div>
   );

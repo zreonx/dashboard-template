@@ -9,9 +9,9 @@ import {
   Users,
 } from "lucide-react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 import { Sidebar, Menu as SMenu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { div } from "framer-motion/client";
@@ -33,6 +33,17 @@ const SIDEBAR_ITEMS = [
 
 function ProSidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("/");
+
+  const useActiveLink = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+      setActiveLink(location.pathname);
+    }, [location.pathname]);
+  };
+
+  useActiveLink();
 
   return (
     <div className='h-full top-0 bottom-0 flex flex-col  relative z-10 border-r border-gray-700'>
@@ -79,6 +90,7 @@ function ProSidebar() {
         >
           {SIDEBAR_ITEMS.map((item) => (
             <MenuItem
+              active={activeLink === item.href}
               key={item.name}
               icon={
                 <item.icon
@@ -90,7 +102,7 @@ function ProSidebar() {
                   }}
                 />
               }
-              component={<Link to={item.href} />}
+              component={<NavLink to={item.href} />}
             >
               <span className="ml-4 whitespace-nowrap'">{item.name}</span>
             </MenuItem>
