@@ -20,7 +20,7 @@ const monthlySalesData = [
   { month: "Jul", sales: 7000 },
 ];
 
-const SalesOverviewChart = () => {
+const SalesOverviewCharts = () => {
   const [selectedTimeRange, setSelectedTimeRange] = useState("This Month");
 
   return (
@@ -73,4 +73,4 @@ const SalesOverviewChart = () => {
     </motion.div>
   );
 };
-export default SalesOverviewChart;
+export default SalesOverviewCharts;
