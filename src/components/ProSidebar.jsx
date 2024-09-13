@@ -37,8 +37,6 @@ function ProSidebar() {
   const [isSidebarClose, setIsSidebarClose] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
 
-  console.log(isSidebarClose);
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
