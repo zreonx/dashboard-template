@@ -36,18 +36,15 @@ function ProSidebar() {
   const screenType = useScreenType();
   const [isSidebarClose, setIsSidebarClose] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-  const [isManualToggle, setIsManualToggle] = useState(true);
 
-  console.log(isSidebarClose, isManualToggle);
+  console.log(isSidebarClose);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
         setIsSidebarClose(true);
-      }
-      if (window.innerWidth > 768) {
+      } else {
         setIsSidebarClose(false);
-        setIsManualToggle(true);
       }
     };
 
@@ -55,20 +52,18 @@ function ProSidebar() {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [isManualToggle]);
+  }, []);
 
   const useActiveLink = () => {
     const location = useLocation();
 
     useEffect(() => {
       setActiveLink(location.pathname);
-      setIsSidebarClose(() => (screenType.isTablet ? true : false));
     }, [location.pathname]);
   };
 
   const toggleSidebar = () => {
-    setIsSidebarClose(!isSidebarClose);
-    setIsManualToggle(true);
+    setIsSidebarClose((prev) => !prev);
   };
 
   useActiveLink();
