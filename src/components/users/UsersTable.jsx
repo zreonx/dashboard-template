@@ -1,54 +1,48 @@
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Edit, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { Edit, Search, Trash2 } from "lucide-react";
 
-const PRODUCT_DATA = [
+const userData = [
   {
     id: 1,
-    name: "Wireless Earbuds",
-    category: "Electronics",
-    price: 59.99,
-    stock: 143,
-    sales: 1200,
+    name: "John Doe",
+    email: "john@example.com",
+    role: "Customer",
+    status: "Active",
   },
   {
     id: 2,
-    name: "Leather Wallet",
-    category: "Accessories",
-    price: 39.99,
-    stock: 89,
-    sales: 800,
+    name: "Jane Smith",
+    email: "jane@example.com",
+    role: "Admin",
+    status: "Active",
   },
   {
     id: 3,
-    name: "Smart Watch",
-    category: "Electronics",
-    price: 199.99,
-    stock: 56,
-    sales: 650,
+    name: "Bob Johnson",
+    email: "bob@example.com",
+    role: "Customer",
+    status: "Inactive",
   },
   {
     id: 4,
-    name: "Yoga Mat",
-    category: "Fitness",
-    price: 29.99,
-    stock: 210,
-    sales: 950,
+    name: "Alice Brown",
+    email: "alice@example.com",
+    role: "Customer",
+    status: "Active",
   },
   {
     id: 5,
-    name: "Coffee Maker",
-    category: "Home",
-    price: 79.99,
-    stock: 78,
-    sales: 720,
+    name: "Charlie Wilson",
+    email: "charlie@example.com",
+    role: "Moderator",
+    status: "Active",
   },
 ];
 
-const ProductsTable = () => {
+function UsersTable() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(PRODUCT_DATA);
-
+  const [filteredUsers, setFilteredUsers] = useState(userData);
   return (
     <motion.div
       className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
@@ -57,9 +51,7 @@ const ProductsTable = () => {
       transition={{ duration: 0.3 }}
     >
       <div className='flex justify-between items-center mb-6'>
-        <h2 className='text-xl font-semibold text-gray-100 mb-4'>
-          Product List
-        </h2>
+        <h2 className='text-xl font-semibold text-gray-100'>Users</h2>
         <div className='relative'>
           <Search
             className='absolute left-3 top-2.5 text-gray-400 z-10'
@@ -72,13 +64,13 @@ const ProductsTable = () => {
 
               setSearchTerm(term);
 
-              const filtered = PRODUCT_DATA.filter(
-                (product) =>
-                  product.name.toLocaleLowerCase().includes(term) ||
-                  product.category.toLowerCase().includes(term)
+              const filtered = userData.filter(
+                (user) =>
+                  user.name.toLocaleLowerCase().includes(term) ||
+                  user.email.toLowerCase().includes(term)
               );
 
-              setFilteredProducts(filtered);
+              setFilteredUsers(filtered);
             }}
             placeholder='Search'
             type='text'
@@ -86,6 +78,7 @@ const ProductsTable = () => {
           />
         </div>
       </div>
+
       <div className='overflow-x-auto '>
         <table className='min-w-full divide-y divide-gray-700'>
           <thead>
@@ -94,59 +87,63 @@ const ProductsTable = () => {
                 Name
               </th>
               <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider '>
-                Category
+                Email
               </th>
               <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider '>
-                Price
+                Role
               </th>
               <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider '>
-                Stock
+                Status
               </th>
               <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider '>
-                Sales
-              </th>
-              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider '>
-                Actions
+                Action
               </th>
             </tr>
           </thead>
           <tbody className='divide-y divide-gray-700 '>
-            {filteredProducts.map((product) => (
+            {filteredUsers.map((user) => (
               <motion.tr
-                key={product.id}
+                key={user.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
                 <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100 flex gap-2 items-center'>
                   <img
-                    src='https://images.unsplash.com/photo-1627989580309-bfaf3e58af6f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2lyZWxlc3MlMjBlYXJidWRzfGVufDB8fDB8fHww'
+                    src={`https://avatar.iran.liara.run/username?username=${user.name}`}
                     alt='Product img'
                     className='size-10 rounded-full'
                   />
-                  {product.name}
-                </td>
-
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-                  {product.category}
-                </td>
-
-                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-                  ${product.price.toFixed(2)}
+                  {user.name}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-                  {product.stock}
+                  {user.email}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-                  {product.sales}
+                  {user.role}
+                </td>
+                <td
+                  className={`px-6 py-4 whitespace-nowrap text-sm text-gray-300`}
+                >
+                  <span
+                    className={`px-4 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      user.status.toLocaleLowerCase() === "active"
+                        ? "bg-green-800 text-green-100"
+                        : "bg-red-800 text-red-100"
+                    }`}
+                  >
+                    {user.status}
+                  </span>
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-                  <button className='text-indigo-400 hover:text-indigo-300 mr-2'>
-                    <Edit size={18} />
-                  </button>
-                  <button className='text-red-400 hover:text-red-300'>
-                    <Trash2 size={18} />
-                  </button>
+                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
+                    <button className='text-indigo-400 hover:text-indigo-300 mr-2'>
+                      <Edit size={18} />
+                    </button>
+                    <button className='text-red-400 hover:text-red-300'>
+                      <Trash2 size={18} />
+                    </button>
+                  </td>
                 </td>
               </motion.tr>
             ))}
@@ -155,6 +152,5 @@ const ProductsTable = () => {
       </div>
     </motion.div>
   );
-};
-
-export default ProductsTable;
+}
+export default UsersTable;
