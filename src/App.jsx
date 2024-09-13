@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import OverViewPage from "./pages/OverViewPage";
 import ProductsPage from "./pages/ProductsPage";
 
-import SideBar from "./components/SideBar";
+// import SideBar from "./components/SideBar";
+import ProSidebar from "./components/ProSidebar";
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
         <div className='absolute inset-0 bg-gradient-to-br from-gray-700 via to-gray-900 opacity-80'></div>
         <div className='absolute inset-0 backdrop-blur-sm '></div>
       </div>
-      <SideBar />
+      {/* <SideBar /> */}
+      <ProSidebar />
       <Routes>
         <Route path='/' element={<OverViewPage />} />
         <Route path='/products' element={<ProductsPage />} />

@@ -12,6 +12,8 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+import { Sidebar, Menu as SMenu, MenuItem, SubMenu } from "react-pro-sidebar";
+
 const SIDEBAR_ITEMS = [
   {
     name: "Overview",
@@ -35,17 +37,19 @@ function SideBar() {
       className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${
         isSidebarOpen ? "w-64" : "w-20"
       }`}
-      animate={{ width: isSidebarOpen ? 256 : 80 }}
+      animate={{ width: isSidebarOpen ? "16rem" : "5rem" }}
+      transition={{ duration: 0.5 }}
     >
       <div className='h-full bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 flex flex-col border-r border-gray-700'>
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsSidebarOpen((prev) => !prev)}
-          className={`p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit `}
+          className={`p-2 rounded-full hover: bg-gray-700 transition-colors max-w-fit `}
         >
           <Menu size={24} />
         </motion.button>
+
         <nav className='mt-8 flex-grow w-full'>
           {SIDEBAR_ITEMS.map((item, index) => (
             <Link key={item.href} to={item.href}>
@@ -66,7 +70,7 @@ function SideBar() {
                       initial={{ opacity: 0, width: 0 }}
                       animate={{ opacity: 1, width: "auto" }}
                       exit={{ opacity: 0, width: 0 }}
-                      transition={{ duration: 0.2, delay: 0.3 }}
+                      transition={{ duration: 0.1, delay: 0.3 }}
                     >
                       {item.name}
                     </motion.span>
